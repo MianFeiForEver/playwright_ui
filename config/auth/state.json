@@ -1,0 +1,13 @@
+{
+  "origins": [
+    {
+      "origin": "https://lanhuapp.com/",
+      "localStorage": [
+        {
+          "name": "token",
+          "value": "eyJhbGciOiJIUzI1NiIsImlhdCI6MTY5MzA1OTM1MSwiZXhwIjoxNzI0NTk1MzUxfQ.eyJpZCI6IjNhYTRkYzcxLTcxYmQtNGM1NC1iNDI0LTcxNTI0NzYxY2FjNSJ9.t2feo1PnoZw293NnVPOg4LVEPr7mYpcdW3frr9QJpkc"
+        }
+      ]
+    }
+  ]
+}
