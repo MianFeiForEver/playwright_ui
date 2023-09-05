@@ -1,4 +1,5 @@
-from core.utils import zoom, set_cookies
+from core.js_handle import start_js, end_js
+from core.utils import zoom
 
 
 class ProjectPage:
@@ -20,8 +21,11 @@ class Project:
         self.project_page = ProjectPage(self.page)
 
     def zoom(self, numbers):
-        set_cookies(self.page)
+        # set_cookies(self.page)
         self.project_page.navigate()
+        self.page.evaluate(start_js())
         self.project_page.click_canvas()
         a = zoom(self.page, numbers)
+        self.page.evaluate(end_js())
+
         # run_lighthouse(self.page.url)
