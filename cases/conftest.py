@@ -1,7 +1,7 @@
 import pytest
 from playwright.sync_api import sync_playwright
 
-from core.utils import cookies
+from core.utils import storage_json
 
 
 @pytest.fixture(scope="session")
@@ -19,13 +19,12 @@ def browser():
 def context(browser, base_url):
     context = browser.new_context(base_url=base_url,
                                   bypass_csp=True, no_viewport=True,
-                                  # storage_state="../config/auth/state.json",
+                                  storage_state=storage_json,
                                   # record_video_dir="media/videos"
                                   )
     # context.tracing.start(screenshots=True, snapshots=True, sources=True)
     context.expose_binding('browser', lambda: browser)
 
-    # context.add_cookies(cookies)
     yield context
     # context.tracing.stop(path="trace.zip")
     context.close()
@@ -34,8 +33,5 @@ def context(browser, base_url):
 @pytest.fixture(scope="function")
 def page(context):
     page = context.new_page()
-
-
     yield page
-
     page.close()

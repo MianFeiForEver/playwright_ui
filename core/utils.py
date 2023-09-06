@@ -28,16 +28,34 @@ def zoom(page, numbers):
             page.mouse.wheel(0, -100)
 
 
-cookies = [{'name': 'PASSPORT',
-            'value': 'ZTV6ZJK5EPOUBYOD3P7GNBUFKZA3GAIXAAQTV53CBWSMBNUAC7TTJ4B5NL5OACSYDPZL7HWZYEC6AQNFOQTJTUBGOFPTTM7O7VA3SBQ.39825E18BCEF34C86CCE88B96FDD5CCF9DA5A59F',
-            'domain': 'lanhuapp.com', 'path': '/', 'expires': 1695727915.58502, 'httpOnly': True, 'secure': True,
-            'sameSite': 'Lax'},
-           {'name': 'session',
-            'value': '.eJyNkEtuHDEMRO_S6zQgUqQo-TIN_mQP7EwG7TG8MHz3aGBkH-0IqFCv3td2zDPfX7an-_mRv7bjEtvTFtRb4a4GBKMDsqeA-LBReuvYaOJU6F6Ng4g7uImG1KgSYk0xEGarwKPN9FKFTZ11hkmM3iAIfGSzRMeRoOFYmBgyZlAduC2QW56_9ZrX-z-0tz_Pl-vhL-mve1WlcIFdwGInZ9qNkNbJSNLAV93aAdjTeNXg7MNB0N1tdVuphov7OA5oo0LlASz1caLPKU4F1gd4LINZSXIJqEw1FtntM455uT7neTsvD7wttEURCWafqQqBxgRI-liHXFbofqrnj1yQnCaWOy9H-xKMu663o_oSMyDLzJX4eM_zJ_BfY7__AkI5gfM.F8zFqw.JmLLQ_RUfb9YVQSK9RQjbuJfgv0',
-            'domain': '.lanhuapp.com', 'path': '/', 'expires': 1700911915.737069, 'httpOnly': True,
-            'secure': False, 'sameSite': 'Lax'},
-           ]
+cookies = [{
+    "name": "PASSPORT",
+    "value": "QBTRPFFW7IIPKHIVVPUPBB2NMR6DQSCQSW3GPFKYS22RZLIAMDJTKTNI6TDV4BFFXP3EVUBR4VLWAR4GGSSYGQRKHKGUVY6X5P6QEHQ.DC0FA4601974B5C8A6D29881BEEA6855E3324893",
+    "domain": "lanhuapp.com",
+    "path": "/",
+    "sameSite": "Lax"
+},
+    {
+        "name": "session",
+        "value": ".eJyNkMFKBEEMRP9lzg500kkn488MnXSii7ou44oH8d_tZfHurQqq4FV9L3se8fG8PF6Pz3hY9tNYHhcnN8tQE6xDrXepaA1CxZQFUWuRohY4slZGZCKMjppdtVWV6UwbZ3iyW1UtolaBrWUmR6mpLu4l1MPBaRAW27qnaQBhLhPkEsdbP8f5-of2-v50Ou_-HP6y1t5puMAqYGMlZ1qNkKZlJGng3XnuANQwnpyYujkIursRuJVqSKz7vkPb6rZJKVXazaJnilOBGQBWcMhKEh5SmeqYZJevsefp_BTH5Tjd8JbR2ygig9kzeoeBxgRI3XEL5DJL16N73M_VaPOHOtlnaqU-1YTLucm0eAAPxNn4_IjjXvjX2J9flWqCPA.F9npSw.cHki2vyLF3_B-3RDXykRakvNdRI",
+        "domain": ".lanhuapp.com",
+        "path": "/",
+        "sameSite": "Lax"
+    },
+]
 
+storage_json = {
+
+    "origins": [
+        {
+            "origin": "https://lanhuapp.com",
+            "localStorage": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsImlhdCI6MTY5Mzk5NzAwNSwiZXhwIjoxNzI1NTMzMDA1fQ.eyJpZCI6IjNhYTRkYzcxLTcxYmQtNGM1NC1iNDI0LTcxNTI0NzYxY2FjNSJ9.6kh3YrrGSGFyOWDYJqWtONL5aRWy1-TREP5HDCD0mp8"
+                },
+            ]
+        }]}
 
 def set_cookies(page: Page):
     page.context.add_cookies(cookies)
@@ -51,6 +69,10 @@ def run_lighthouse(url):
                '--port=9222',
                '--output=json',
                '--extra-headers', f'cookie: {cookies}'
-               '--output-path=./report.html'
+                                  '--output-path=./report.html'
                ]
     subprocess.call(' '.join(command), shell=True)
+
+
+def add_cookies(page: Page):
+    page.context.add_cookies(cookies)

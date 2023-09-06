@@ -41,3 +41,5 @@ class Login:
         self.login_page.fill_password(password)
         self.login_page.click_login_button()
         self.page.wait_for_load_state("networkidle")
+        cookie = self.page.context.cookies()
+        print(cookie)
