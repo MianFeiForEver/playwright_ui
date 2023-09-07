@@ -4,8 +4,10 @@ import subprocess
 from pathlib import Path
 
 from configobj import ConfigObj
-from playwright.async_api import Page
+from playwright.sync_api import Page
 from ruamel.yaml import YAML
+
+login_res = None
 
 
 def home():
