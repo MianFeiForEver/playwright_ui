@@ -1,7 +1,5 @@
 from playwright.sync_api import Playwright, sync_playwright, Page, expect
 
-from core.utils import create_page
-
 
 def mg_login(page: Page) -> None:
     page.goto("/login")

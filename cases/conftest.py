@@ -16,7 +16,8 @@ def browser_type_launch_args(browser_type_launch_args, browser_name):
 def browser_context_args(browser_context_args):
     return {**browser_context_args, "storage_state": storage_json, "no_viewport": True, "bypass_csp": True,
             "ignore_https_errors": True,
-            "record_video_dir": home() + "/media/videos"}
+            # "record_video_dir": home() + "/media/videos"
+            }
 
 
 @pytest.fixture(scope="session")
