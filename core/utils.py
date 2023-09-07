@@ -13,7 +13,6 @@ def home():
     获取项目根目录
     :return:
     """
-    print("****")
     return Path(__file__).parent.parent.__str__()
 
 

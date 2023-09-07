@@ -48,14 +48,3 @@ def rm_files(page: Page) -> None:
     print("size:", files.count())
 
 
-# 登录lanhu)
-def run(playwright: Playwright) -> None:
-    base_url = "https://mastergo.com/"
-    page = next(create_page(playwright, base_url))
-    mg_login(page)
-    creat_file(page)
-    rm_files(page)
-
-
-with sync_playwright() as playwright:
-    run(playwright)

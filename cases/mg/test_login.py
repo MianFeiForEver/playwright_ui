@@ -5,4 +5,4 @@ from data.pages.mg.login import Login
 
 def test_login(page: Page):
     login = Login(page)
-    login.login_by_password("1@1.data", "111111")
+    login.login_by_password("1@1.lanhu", "111111")
