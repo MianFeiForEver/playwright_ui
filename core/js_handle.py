@@ -9,12 +9,11 @@
 
 import re
 
-
-home = '../'
+from core.utils import home
 
 
 def open_js(js_name):
-    with open(home + "/js_data/" + js_name, "r", encoding="utf-8") as q:
+    with open(home() + "/js_data/" + js_name, "r", encoding="utf-8") as q:
         js = q.read()
     return js
 

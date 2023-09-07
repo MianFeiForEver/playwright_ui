@@ -1,8 +1,23 @@
 import json
 import subprocess
+from pathlib import Path
 
+from configobj import ConfigObj
 from playwright.async_api import Page
 from ruamel.yaml import YAML
+
+
+def home():
+    """
+    获取项目根目录
+    :return:
+    """
+    print("****")
+    return Path(__file__).parent.parent.__str__()
+
+
+def get_ini():
+    return ConfigObj("pytest.ini", encoding="UTF8")
 
 
 def load(path):
@@ -12,7 +27,7 @@ def load(path):
 
 
 def load_selectors(page_name):
-    return load("../data/elements/lanhu.yaml").get(page_name)
+    return load(home() + "/data/elements/lanhu.yaml").get(page_name)
 
 
 def zoom(page, numbers):
@@ -56,6 +71,7 @@ storage_json = {
                 },
             ]
         }]}
+
 
 def set_cookies(page: Page):
     page.context.add_cookies(cookies)

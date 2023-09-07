@@ -1,2 +1,4 @@
 /node_modules/
 /venv/
+/allure-results/
+/media/

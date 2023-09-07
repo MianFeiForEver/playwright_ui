@@ -1,27 +1,30 @@
 import pytest
-from playwright.sync_api import sync_playwright
 
-from core.utils import storage_json
-
-
-@pytest.fixture(scope="session")
-def browser():
-    with sync_playwright() as p:
-        browser = p.chromium.launch(headless=False, args=["--start-maximized",
-                                                          "--remote-debugging-port=9222",  # 配置远程调试端口
-                                                          ], )
-
-        yield browser
-        browser.close()
+from core.utils import storage_json, home
 
 
 @pytest.fixture(scope="session")
-def context(browser, base_url):
-    context = browser.new_context(base_url=base_url,
-                                  bypass_csp=True, no_viewport=True,
-                                  storage_state=storage_json,
-                                  # record_video_dir="media/videos"
-                                  )
+def browser_type_launch_args(browser_type_launch_args, browser_name):
+    if browser_name == "chromium":
+        args = ["--start-maximized", "--remote-debugging-port=9222", ]
+    else:
+        args = []
+    return {**browser_type_launch_args, "args": args, }
+
+
+@pytest.fixture(scope="session")
+def browser_context_args(browser_context_args):
+    return {**browser_context_args, "storage_state": storage_json, "no_viewport": True, "bypass_csp": True,
+            "ignore_https_errors": True,
+            "record_video_dir": home() + "/media/videos"}
+
+
+@pytest.fixture(scope="session")
+def context(browser_type, pytestconfig, browser_type_launch_args, browser_context_args):
+    browser = browser_type.launch(**browser_type_launch_args)
+    context = browser.new_context(
+        **browser_context_args
+    )
     # context.tracing.start(screenshots=True, snapshots=True, sources=True)
     context.expose_binding('browser', lambda: browser)
 
