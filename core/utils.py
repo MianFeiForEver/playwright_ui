@@ -1,3 +1,4 @@
+import argparse
 import json
 import subprocess
 from pathlib import Path
@@ -92,3 +93,27 @@ def run_lighthouse(url):
 
 def add_cookies(page: Page):
     page.context.add_cookies(cookies)
+
+
+def param():
+    parser = argparse.ArgumentParser()
+    # parser.add_argument("--p", default="saas", choices=["saas", "ts", "enterprise"])
+    parser.add_argument(
+        "--e",
+        default="online",
+        choices=["online", "pre", "test"],
+    )
+    parser.add_argument("--r", default=None)
+    return parser.parse_args()
+
+
+def get_base_url(env):
+    if env == "online" or not env:
+        return "https://mastergo.com"
+
+
+def save_test_info(env=None):
+    config = get_ini()
+    config["pytest"]["env"] = env
+    config["pytest"]["base_url"] = get_base_url(env)
+    config.write()
