@@ -4,7 +4,7 @@ import subprocess
 from pathlib import Path
 
 from configobj import ConfigObj
-from playwright.async_api import Page
+from playwright.sync_api import Page
 from ruamel.yaml import YAML
 
 
@@ -116,3 +116,14 @@ def save_test_info(env=None):
     config["pytest"]["env"] = env
     config["pytest"]["base_url"] = get_base_url(env)
     config.write()
+
+
+test_params = dict()
+
+
+def save_params(key, value):
+    test_params[key] = value
+
+
+def get_params(key):
+    return test_params.get(key, None)
