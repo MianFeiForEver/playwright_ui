@@ -1,6 +1,6 @@
 import pytest
 
-from core.utils import storage_json, home
+from core.utils import storage_json
 
 
 @pytest.fixture(scope="session")
@@ -20,14 +20,13 @@ def browser_context_args(browser_context_args):
             }
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture(scope="function")
 def context(browser_type, pytestconfig, browser_type_launch_args, browser_context_args):
     browser = browser_type.launch(**browser_type_launch_args)
     context = browser.new_context(
         **browser_context_args
     )
     # context.tracing.start(screenshots=True, snapshots=True, sources=True)
-    context.expose_binding('browser', lambda: browser)
     context.set_default_timeout(60000)
     yield context
     # context.tracing.stop(path="trace.zip")
